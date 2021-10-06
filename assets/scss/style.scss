@@ -1,0 +1,470 @@
+$blue: rgb(71, 93, 165);
+$light: rgb(173, 173, 180);
+$blue-dark: rgb(30, 20, 121);
+$page-duration: .6s;
+
+@import "mixins";
+@import "loader";
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+input {
+    user-select: auto;
+}
+
+img {
+    pointer-events: none;
+}
+
+
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body, * {
+    font-family: 'Vazir', sans-serif;
+}
+
+.text-left {
+    text-align: left;
+    direction: left;
+}
+
+.d-flex {
+    display: flex;
+}
+
+main {
+    position: relative;
+    min-height: 100%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+main {
+    min-height: 100vh;
+    background-color: #ededed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.wrapper {
+    margin: 30px auto;
+    width: 85%;
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+
+   @include responsive(md) {
+       width: 90%;
+   }
+}
+
+.left {
+    flex: 1;
+    min-height: 500px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 0;
+
+    @include responsive(lg) {
+        flex: unset;
+    }
+}
+
+.center {
+    flex: 6;
+    min-height: 600px;
+    background-color: rgb(27, 62, 177);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+    @include responsive(1110px) {
+        flex: 5;
+    }
+    @include responsive(lg) {
+        display: none;
+    }
+}
+
+.right {
+    flex: 4;
+    min-height: 500px;
+    background-color: white;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+
+    @include responsive(md) {
+       width: 100%;
+    }
+}
+
+/* ********** */
+
+.left .logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left .btn-page-changer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 2;
+    cursor: pointer;
+    transition: background .3s;
+
+    &:hover {
+        background: rgb(248, 248, 248);
+    }
+    &:active {
+        background: rgb(238, 238, 238);
+    }
+
+    legend {
+        @include responsive(md) {
+            transform: rotate(-90deg);
+            flex: unset;
+        }
+    }
+}
+
+.left .border {
+    width: 6px;
+    background-color: rgb(27, 62, 177);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform $page-duration ease;
+}
+
+/* **** RIGHT ****** */
+
+.page {
+    opacity: 0;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @include responsive(md) {
+        width: 90%;
+     }
+}
+
+
+.page.active {
+    z-index: 2;
+    animation: entry .3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+    animation-delay: .5s;
+
+    .form-item {
+        opacity: 0;
+    }
+
+    .form-item-1 {
+        animation: entry-item .8s;
+        animation-delay: .2s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
+    }
+    .form-item-2 {
+        animation: entry-item .8s;
+        animation-delay: .4s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
+    }
+    .form-item-3 {
+        animation: entry-item .8s;
+        animation-delay: .6s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
+    }
+    .form-item-4 {
+        animation: entry-item .8s;
+        animation-delay: 0.8s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
+    }
+    .form-item-5 {
+        animation: entry-item .8s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
+    }
+    .form-item-6 {
+        animation: entry-item .8s;
+        animation-delay: 1.2s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
+    }
+}
+
+
+
+.out-down {
+    animation: out-down $page-duration;
+    animation-fill-mode: forwards;
+}
+
+.out-top {
+    animation: out-top $page-duration;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes out-down {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    99% {
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 0;
+        transform: translate(-50%, 135%);
+    }
+}
+
+
+@keyframes out-top {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    99% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 0;
+        transform: translate(-50%, -135%);
+    }
+}
+
+@keyframes entry-item {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes entry {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.page {
+    .header {
+        margin-bottom: .8rem;
+        p {
+            display: inline;
+            color: $light;
+            font-size: .8rem;
+        }
+
+        a {
+            font-size: .89rem;
+            color: $blue;
+        }
+    }
+    .footer {
+        small {
+            color: $light;
+            font-size: .7rem;
+        }
+    }
+}
+
+.form-group {
+    margin-bottom: 1.4rem;
+
+    label {
+        color: $blue-dark;
+        font-size: .85rem;
+    }
+
+    input {
+        border-width: 1px;
+        border-style: solid;
+        box-shadow: none;
+        height: 45px;
+        border-radius: 5px;
+        padding: 0 10px;
+        width: 100%;
+        caret-color: $blue-dark;
+        font-size: 14px;
+        transition: border .2s ease-in;
+        appearance: none;
+
+        &:focus-visible {
+            outline: 1px solid $blue-dark;
+        }
+    }
+
+    .button {
+        box-shadow: none;
+        border: none;
+        width: 100%;
+        height: 45px;
+        padding: 0 15px;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        transition: all .3s ease-in-out;
+        position: relative;
+        overflow: hidden;
+        background-color: $blue-dark;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:disabled {
+            background-color: darken($color: $blue-dark, $amount: 10);
+            cursor: not-allowed;
+        }
+
+        .default {
+            display: block;
+            &.deactive {
+                animation: to_bottom .5s ease;
+                animation-fill-mode: forwards;
+            }
+        }
+    }
+}
+
+
+@keyframes to_bottom {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+}
+
+@keyframes fadeInOpacity {
+	0% {opacity: 0;}
+    15% {opacity: 100;}
+    85% {opacity: 100;}
+    100% {opacity: 0;}
+}
+
+.slides {
+    .slide {
+        animation-timing-function: ease-in-out;
+        position: relative;
+        display: none;
+        opacity: 0;
+        
+        &.active {
+            display: flex;
+            animation-name: fadeInOpacity;
+            animation-duration: 6s;
+        }
+    }
+}
+
+.slide-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .caption {
+        margin: 1.5em 3rem 0 3rem;
+        text-align: center;
+        color: rgb(236, 236, 236);
+        font-size: .8rem;
+    }
+}
+
+
+@keyframes to_left {
+    0% {
+
+        transform: translateX(0%);
+    }
+    99% {
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes to_right {
+    0% {
+        transform: translateX(0%);
+    }
+    99% {
+    }
+    100% {
+        transform: translateX(150%);
+    }
+}
+
+
+.right.done {
+    animation: to_left 1.5s ease;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+.left.done {
+    animation: to_right 1.5s ease;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
